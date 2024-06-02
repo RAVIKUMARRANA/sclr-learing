@@ -1,4 +1,4 @@
-Design and implement a Linked List data structure.
+1. Design and implement a Linked List data structure.
 A node in a linked list should have the following attributes - an integer value and a pointer to the next node.
 
 
@@ -54,7 +54,8 @@ A node in a linked list should have the following attributes - an integer value 
         System.out.print(temp.data);
   }
 
- You are given a singly linked list having head node A. You have to reverse the linked list and return the head node of that reversed list.
+
+2. You are given a singly linked list having head node A. You have to reverse the linked list and return the head node of that reversed list.
 
 NOTE: You have to do it in-place and in one-pass.
 
@@ -83,7 +84,7 @@ public class Solution {
     }
 }
 
-Given a singly linked list A, determine if it's a palindrome. Return 1 or 0, denoting if it's a palindrome or not, respectively.
+3. Given a singly linked list A, determine if it's a palindrome. Return 1 or 0, denoting if it's a palindrome or not, respectively.
 
 public class Solution {
     public int lPalin(ListNode A) {
