@@ -72,3 +72,121 @@ public class Solution {
     return head;
     }
 }
+
+
+Problem Description
+Sort a linked list, A in O(n log n) time. Merge sort
+
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     public int val;
+ *     public ListNode next;
+ *     ListNode(int x) { val = x; next = null; }
+ * }
+ */
+public class Solution {
+    public ListNode sortList(ListNode A) {
+        if(A == null || A.next == null){
+            return A;
+        }
+
+        // find middle of list
+        ListNode middle = findMiddle(A);
+        // System.out.println(middle.val);
+
+        //divide left and right of the middle
+        ListNode midNext = middle.next;
+        middle.next = null;
+
+        ListNode left = sortList(A);
+        ListNode right = sortList(midNext);
+
+        ListNode res= mergeTwoLists(left,right);
+        return res;
+    }
+
+    public ListNode findMiddle(ListNode node){
+        if(node == null || node.next == null){
+            return node;
+        }
+        ListNode slow = node;
+        ListNode faster = node;
+
+        while(faster.next != null && faster.next.next != null){
+            slow = slow.next;
+            faster = faster.next.next;
+        }
+        return slow;
+    }
+     public ListNode mergeTwoLists(ListNode A, ListNode B) {
+        if(A == null) return B;
+        if(B == null) return A;
+        ListNode head = null;
+        ListNode tmp = null;
+        if(A.val < B.val){
+            head = A;
+            tmp = A;
+            A = A.next;
+        }else{
+            head = B;
+            tmp = B;
+            B = B.next;
+        }
+
+        while(A != null && B != null){
+            if(A.val < B.val){
+                tmp.next = A;
+                tmp = tmp.next;
+                A = A.next;
+            }else{
+                tmp.next = B;
+                tmp = tmp.next;
+                B = B.next;
+            }
+        }
+        if(A == null){
+            tmp.next = B;
+        }
+        if(B == null){
+            tmp.next = A;
+        }
+
+    return head;
+    }
+}
+
+
+Q4. Remove Loop from Linked List
+
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     public int val;
+ *     public ListNode next;
+ *     ListNode(int x) { val = x; next = null; }
+ * }
+ */
+public class Solution {
+    public ListNode solve(ListNode A) {
+        ListNode slow = A;
+        ListNode fast = A;
+        while(fast != null && fast.next != null){
+            slow=slow.next;
+            fast=fast.next.next;
+            if(slow == fast){ // loop detected
+                // find the start point 
+                slow = A;
+                while(slow.next != fast.next){
+                    slow=slow.next;
+                    fast=fast.next;
+                }
+                fast.next = null;
+                return A;
+            }
+        }
+        return null;
+
+    }
+}
+
