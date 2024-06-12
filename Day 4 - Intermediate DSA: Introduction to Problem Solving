@@ -1,0 +1,42 @@
+Q1. Count Factors - 2
+Problem Description
+Given an integer A, you need to find the count of it's factors.
+Factor of a number is the number which divides it perfectly leaving no remainder.
+Example : 1, 2, 3, 6 are factors of 6
+
+public class Solution {
+    public int solve(int A) {
+        int count=0;
+        for(int i=1;i*i<=A;i++){
+            if(A%i == 0){
+                if(i == A/i) count++;
+                else count=count+2;
+            }
+        }
+        return count;
+    }
+}
+
+Q2. IsPrime
+Problem Description
+Given a number A. Return 1 if A is prime and return 0 if not. 
+Note : 
+The value of A can cross the range of Integer.
+
+public class Solution {
+    public int solve(int A) {
+        if(factorCount(A) == 2){
+            return 1;
+        }else return 0;
+    }
+    public int factorCount(int A){
+        int count =0;
+        for(int i=1; i*i <= A; i++){
+            if(A%i == 0){
+                if(i == A/i) count++;
+                else count+=2;
+            }
+        }
+        return count;
+    }
+}
