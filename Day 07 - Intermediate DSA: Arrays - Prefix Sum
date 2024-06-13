@@ -1,1 +1,124 @@
+Q1. Prefix Sum Formula
+The prefix sum formula for an array A of N integers is given by :-
 
+prefSum[i] = prefSum[i - 1] + A[i]
+
+Q2. Time Complexity of Prefix Sum
+What is the time complexity of creating the prefix sum array of an array A of N integers ?
+
+TC - O(N)
+
+Q3. Range Sum Query
+Problem Description
+You are given an integer array A of length N.
+You are also given a 2D integer array B with dimensions M x 2, where each row denotes a [L, R] query.
+For each query, you have to find the sum of all elements from L to R indices in A (0 - indexed).
+More formally, find A[L] + A[L + 1] + A[L + 2] +... + A[R - 1] + A[R] for each query.
+
+public class Solution {
+    public long[] rangeSum(int[] A, int[][] B) {
+        long[] ans = new long[B.length];
+        long[] pf = pfSum(A);
+        for(int i=0;i<B.length;i++){
+            int l=B[i][0];
+            int r=B[i][1];
+            if(l == 0){
+                ans[i] = pf[r];
+            }else{
+                ans[i]= pf[r]-pf[l-1];
+            }
+        }
+        return ans;
+    }
+
+    public long[] pfSum(int[] A ){
+        long[] pfSum= new long[A.length];
+        pfSum[0]=A[0];
+        for(int i=1;i<A.length;i++){
+            pfSum[i] = pfSum[i-1] + A[i];
+        }
+        return pfSum;
+    }
+}
+
+
+
+Q4. Special Index
+Problem Description
+Given an array, arr[] of size N, the task is to find the count of array indices such that removing an element from these indices makes the sum of even-indexed and odd-indexed array elements equal.
+Problem Constraints
+1 <= N <= 105
+-105 <= A[i] <= 105
+Sum of all elements of A <= 109
+
+public class Solution {
+    public int solve(int[] A) {
+        int pf_even[] =new int[A.length];
+        int pf_odd[] =new int[A.length];
+        pf_even[0]= A[0];
+        pf_odd[0]= 0;
+        for(int i=1;i<A.length;i++){
+            if(i%2 == 0){
+                pf_even[i] = pf_even[i-1]+A[i];
+            }else{
+                pf_even[i] = pf_even[i-1];
+            }
+
+            if(i%2 != 0){
+                pf_odd[i] = pf_odd[i-1]+A[i];
+            }else{
+                pf_odd[i] = pf_odd[i-1];
+            }
+        }
+        int count =0 ;
+
+       for(int i=0; i < A.length; i++){
+           int sumEven = 0;
+           int sumOdd = 0;
+            if(i > 0){
+                sumEven = sumEven + pf_even[i-1] + pf_odd[A.length-1] - pf_odd[i];
+                sumOdd = sumOdd + pf_odd[i-1] + pf_even[A.length-1] - pf_even[i];
+            }else{
+                sumEven = sumEven + pf_odd[A.length-1] - pf_odd[i];
+                sumOdd = sumOdd + pf_even[A.length-1] - pf_even[i];
+            }
+        
+            if(sumEven == sumOdd){
+                count++;
+            }
+       }
+    return count;
+    }
+}
+
+
+Q5. Prefix Sum - I
+Given the prefix sum of an array, prefSum = [-2, 4, 1, 5, 2]
+What is the sum of the original array from index 0 to 2 (0-based) ?
+
+Ans = 1
+
+Q6. Prefix Sum - II
+Given the prefix sum of an array, prefSum = [-2, 4, 1, 5, 2]
+What is the sum of the original array from index 2 to 4 (0-based) ?
+
+Ans = -2
+
+Q7. In-place Prefix Sum
+Problem Description
+Given an array A of N integers. Construct prefix sum of the array in the given array itself.
+
+public class Solution {
+    public int[] solve(int[] A) {
+        
+        for(int i=0;i<A.length;i++){
+            if(i==0){
+                A[i]=A[i];
+            }else{
+                A[i]= A[i-1] + A[i];
+            }
+           
+        }
+        return A;
+    }
+}
