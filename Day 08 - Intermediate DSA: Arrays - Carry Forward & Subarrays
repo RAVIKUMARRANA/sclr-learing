@@ -1,1 +1,152 @@
+Q2. Closest MinMax
+Problem Description
+Given an array A, find the size of the smallest subarray such that it contains at least one occurrence of the maximum value of the array
+and at least one occurrence of the minimum value of the array.
+
+Problem Constraints
+1 <= |A| <= 2000
+
+
+
+public class Solution {
+    public int solve(ArrayList<Integer> A) {
+        int max = A.stream().mapToInt(e->e).max().getAsInt();
+        int min = A.stream().mapToInt(e->e).min().getAsInt();
+
+        int min_ptr=-1;
+        int max_ptr=-1;
+        int size =-1;
+        for(int i=0;i<A.size();i++){
+            if(A.get(i)==min){
+                min_ptr = i;
+            }
+            if(A.get(i)==max){
+                max_ptr = i;
+            }
+
+            if(min_ptr != -1 && max_ptr != -1){
+                int len  = (Math.abs(max_ptr-min_ptr)+1);
+                if(size != -1){
+                    size =  len < size ? len : size;
+                }else{
+                    size = len;
+                }         
+            }
+        }
+       return size;
+    }
+}
+
+
+Q3. Special Subsequences "AG"
+Problem Description
+You have given a string A having Uppercase English letters.
+You have to find how many times subsequence "AG" is there in the given string.
+NOTE: Return the answer modulo 109 + 7 as the answer can be very large.
+
+Problem Constraints
+1 <= length(A) <= 105
+
+public class Solution {
+    public int solve(String A) {
+        int ans = 0;
+        int count = 0;
+       int len = A.length();
+        for(int i=len -1 ;i>=0; i--){
+            if(A.charAt(i) == 'G'){
+                count  += 1; 
+            }
+
+            if(A.charAt(i) == 'A' ){
+                ans = ans + count;
+                ans %= 1000000007;
+                
+            }
+        }
+        return ans;
+    }
+}
+
+
+Q5. Subarray in given range
+Problem Description
+Given an array A of length N, return the subarray from B to C.
+Problem Constraints
+1 <= N <= 105
+1 <= A[i] <= 109
+0 <= B <= C < N
+
+public class Solution {
+    public ArrayList<Integer> solve(ArrayList<Integer> A, int B, int C) {
+        ArrayList<Integer> ans = new ArrayList();
+        for(int i=B;i<=C;i++){
+            ans.add(A.get(i));
+        }
+        return ans;
+    }
+}
+
+
+Q6. Generate all subarrays
+Problem Description
+You are given an array A of N integers.
+Return a 2D array consisting of all the subarrays of the array
+Note : The order of the subarrays in the resulting 2D array does not matter.
+Problem Constraints
+1 <= N <= 100
+1 <= A[i] <= 105
+
+public class Solution {
+    public ArrayList<ArrayList<Integer>> solve(ArrayList<Integer> A) {
+        ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
+
+        for(int i=0;i<A.size();i++){
+            int startIndex = i;
+            ArrayList<Integer> sub = new ArrayList<>();
+            for(int j = i; j< A.size();j++){
+                int endIndex = j;
+                ArrayList<Integer> arr = new ArrayList<>();
+                for(int k=startIndex;k<=endIndex;k++){
+                    arr.add(A.get(k));                   
+                }
+                ans.add(arr);
+            } 
+        }
+        return ans;
+    }
+}
+
+
+Q7. Best Time to Buy and Sell Stocks 
+Problem Description
+Say you have an array, A, for which the ith element is the price of a given stock on day i.
+If you were only permitted to complete at most one transaction (ie, buy one and sell one share of the stock), design an algorithm to find the maximum profit.
+Return the maximum possible profit.
+
+Problem Constraints
+0 <= A.size() <= 700000
+1 <= A[i] <= 107
+
+public class Solution {
+    // DO NOT MODIFY THE ARGUMENTS WITH "final" PREFIX. IT IS READ ONLY
+    public int maxProfit(final int[] A) {
+        int len = A.length;
+        int[] pf = new int[len];
+        int max = 0;
+        for(int i=len-1;i>=0;i--){            
+            pf[i]=Math.max(max,A[i]);
+            max = pf[i];
+        }
+        // for(int i = 0 ;i<len;i++)
+        //     System.out.println(pf[i]);
+
+        int maxProfit = 0;
+        for(int i=0;i<len;i++){
+            int profit = Math.subtractExact(pf[i],A[i]);
+            maxProfit = Math.max(maxProfit,profit); 
+            // System.out.print(maxProfit);
+        }
+        return maxProfit;   
+    }
+}
 
