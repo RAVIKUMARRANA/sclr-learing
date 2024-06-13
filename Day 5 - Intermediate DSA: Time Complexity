@@ -1,0 +1,116 @@
+Q1. Find Time Complexity - 1
+
+for (int i = 1; i <= n; i += 2) {
+    System.out.print(i);
+}
+
+TC. - O(n)
+
+Q2. Find Time Complexity - 2
+
+static int func(int n) {
+    int s = 0;
+    for (int i = 1; i <= 100; i++) {
+        s += i;
+    }
+    return s;
+}
+TC - O(1)
+
+
+static void solve(int N, int M) {
+    for (int i = 1; i <= N; i++) {
+        if (N % i == 0)
+            System.out.println(i);
+    }
+    for (int i = 1; i <= M; i++) {
+        if (M % i == 0)
+            System.out.println(i);
+    }
+}
+TC - O(N+M)
+
+
+for (int i = 0; i < n; i++) {
+    for (int j = 0; j <= i; j++) {
+        System.out.print(i + j + " ");
+    }
+    System.out.println();
+}
+
+TC - O(n^2)
+
+for (int i = 1; i <= n; i *= 2) {
+    for (int j = 1; j <= n; j++) {
+        System.out.print(i + j + " ");
+    }
+    System.out.println();
+}
+
+TC - O(nlogn)
+
+int a = 0, i = N;
+while (i) {
+    a = a + i;
+    i = i / 2;
+}
+
+TC- O(logn)
+
+for (int i = 1; i <= 100; i *= 2) {
+    for (int j = 1; j <= n; j++) {
+        System.out.print(i + j + " ");
+    }
+    System.out.println();
+}
+TC - O(n)
+
+static int func(int n) {
+    int s = 0;
+    for (int i = 0; i < n; i = i * 2) {
+        s += i;
+    }
+    return s;
+}
+
+TC - O(&)
+
+int count =0;
+while(N > 0){
+    count++;
+    N/=3;
+}
+
+TC - O(log(N)) {Base 3}
+
+
+public void solve() {
+    int i = 1;
+    while (i < n) {
+        int x = i;
+        while (x--> 0) {
+            //O(1) operation
+        }
+        i++;
+    }
+}
+
+TC - O(n^2)
+
+for (int i = 0; i < N; i++) { 
+  for (int j = i; j < N; j++) { 
+     break; 
+  }
+}
+
+TC - O(N)
+
+int a = 0;
+for (int i = 0; i < N; i++) {
+    for (int j = N; j > i; --j) {
+        a += i + j;
+    }
+}
+
+TC - O(N*N)
+
